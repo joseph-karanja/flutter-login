@@ -1,3 +1,5 @@
+import 'package:authenticaton_project/pages/forgot_password.dart';
+import 'package:authenticaton_project/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:authenticaton_project/pages/register.dart';
 
@@ -9,7 +11,7 @@ class LoginPage extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          margin: EdgeInsets.all(24),
+          margin: const EdgeInsets.all(24),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -17,6 +19,7 @@ class LoginPage extends StatelessWidget {
               _inputField(context),
               _forgotPassword(context),
               _signup(context),
+              _seeHomeButton(context),
             ],
           ),
         ),
@@ -25,13 +28,13 @@ class LoginPage extends StatelessWidget {
   }
 
   _header(context) {
-    return Column(
+    return const Column(
       children: [
         Text(
-          "Welcome Back",
+          "Welcome Back !",
           style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
         ),
-        Text("Enter your credential to login"),
+        Text("Enter your credentials to login"),
       ],
     );
   }
@@ -42,15 +45,16 @@ class LoginPage extends StatelessWidget {
       children: [
         TextField(
           decoration: InputDecoration(
-              hintText: "Email",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: Icon(Icons.email)),
+            hintText: "Email",
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.email),
+          ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         TextField(
           decoration: InputDecoration(
             hintText: "Password",
@@ -59,20 +63,21 @@ class LoginPage extends StatelessWidget {
                 borderSide: BorderSide.none),
             fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
             filled: true,
-            prefixIcon: Icon(Icons.lock),
+            prefixIcon: const Icon(Icons.lock),
           ),
           obscureText: true,
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {},
-          child: Text(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.orangeAccent,
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+          child: const Text(
             "Login",
             style: TextStyle(fontSize: 20),
-          ),
-          style: ElevatedButton.styleFrom(
-            shape: StadiumBorder(),
-            padding: EdgeInsets.symmetric(vertical: 16),
           ),
         )
       ],
@@ -80,26 +85,65 @@ class LoginPage extends StatelessWidget {
   }
 
   _forgotPassword(context) {
-    return TextButton(onPressed: () {}, child: Text("Forgot password?"));
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ForgotPassword(),
+          ),
+        );
+      },
+      child: const Text(
+        "Forgot password?",
+        style: TextStyle(
+          color: Colors.orangeAccent,
+        ),
+      ),
+    );
   }
 
   _signup(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Don't have an account? "),
+        const Text("Don't have an account? "),
         TextButton(
           onPressed: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Register(),
+                builder: (context) => const Register(),
               ), // Navigate to the Register screen
             );
           },
-          child: Text("Sign Up"),
-        )
+          child: const Text(
+            "Sign Up",
+            style: TextStyle(
+              color: Colors.orangeAccent,
+            ),
+          ),
+        ),
       ],
+    );
+  }
+
+  _seeHomeButton(context) {
+    return TextButton(
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ), // Navigate to the Register screen
+        );
+      },
+      child: const Text(
+        "View Home Page",
+        style: TextStyle(
+          color: Colors.orangeAccent,
+        ),
+      ),
     );
   }
 }
